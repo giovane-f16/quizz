@@ -2,7 +2,7 @@ const question       = document.querySelector("#question");
 const answersBox     = document.querySelector("#answers-box");
 const quizzContainer = document.querySelector("#quizz-container");
 const scoreContainer = document.querySelector("#score-container");
-const letters        = ["a", "b", "c", "d"];
+const letters        = ["a", "b", "c", "d", "e"];
 let points           = 0;
 let actualQuestion   = 0;
 
@@ -26,6 +26,10 @@ const questions = [
           "answer": "Banco de dados",
           "correct": false
         },
+        {
+            "answer": "Cloud computing",
+            "correct": false
+        },
       ]
     },
     {
@@ -46,6 +50,10 @@ const questions = [
         {
           "answer": "#let",
           "correct": false
+        },
+        {
+            "answer": "%const",
+            "correct": false
         },
       ]
     },
@@ -68,6 +76,10 @@ const questions = [
           "answer": "/",
           "correct": false
         },
+        {
+            "answer": "&",
+            "correct": false
+        },
       ]
     },
   ]
@@ -86,6 +98,26 @@ function createQuestion(i){
     const questionNumber = question.querySelector("#question-number");
     questionText.textContent = questions[i].question;
     questionNumber.textContent = i + 1;
+
+    questions[i].answers.forEach(function(answer, i){
+       const answerTemplate = document.querySelector(".answer-template").cloneNode(true);
+       const letterBtn = answerTemplate.querySelector(".btn-letter");
+       const answerText = answerTemplate.querySelector(".question-answer");
+       letterBtn.textContent = letters[i];
+       answerText.textContent = answer["answer"];
+
+       answerTemplate.setAttribute("correct-answer", answer["correct"]);
+       answerTemplate.classList.remove("hide");
+       answerTemplate.classList.remove("answer-template");
+
+       answersBox.appendChild(answerTemplate);
+
+       answerTemplate.addEventListener("click", function(){
+           alert(this);
+       });
+    });
+
+    actualQuestion++;
 }
 
 init();
