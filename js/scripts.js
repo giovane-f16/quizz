@@ -125,10 +125,21 @@ function checkAnswer(btn){
   buttons.forEach(function(button){
     if(button.getAttribute("correct-answer") === "true"){
       button.classList.add("correct-answer");
+      if(btn === button){
+        points++;
+      }
+
     } else{
       button.classList.add("wrong-answer");
     }
   }); 
+  nextQuestion();
+}
+function nextQuestion(){
+  setTimeout(function(){
+    if(actualQuestion >= questions.length){}
+    createQuestion(actualQuestion);
+  }, 1500);
 }
 
 init();
