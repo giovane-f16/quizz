@@ -113,11 +113,22 @@ function createQuestion(i){
        answersBox.appendChild(answerTemplate);
 
        answerTemplate.addEventListener("click", function(){
-           alert(this);
+           checkAnswer(this);
        });
     });
 
     actualQuestion++;
+}
+
+function checkAnswer(btn){
+  const buttons = answersBox.querySelectorAll("button");
+  buttons.forEach(function(button){
+    if(button.getAttribute("correct-answer") === "true"){
+      button.classList.add("correct-answer");
+    } else{
+      button.classList.add("wrong-answer");
+    }
+  }); 
 }
 
 init();
