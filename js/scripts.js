@@ -135,11 +135,31 @@ function checkAnswer(btn){
   }); 
   nextQuestion();
 }
+
 function nextQuestion(){
   setTimeout(function(){
-    if(actualQuestion >= questions.length){}
+    if(actualQuestion >= questions.length){
+      showSuccessMessage();
+      return;
+    }
     createQuestion(actualQuestion);
   }, 1500);
+}
+
+function showSuccessMessage(){
+  hideOrShowQuizz();
+  const score = ((points/questions.length) * 100).toFixed(2);
+  const displayScore = document.querySelector("#display-score span");
+  displayScore.textContent = score.toString();
+  const correctAnswers = document.querySelector("#correct-answers");
+  correctAnswers.textContent = points;
+  const totalQuestions = document.querySelector("#questions-qty");
+  totalQuestions.textContent = questions.length;
+}
+
+function hideOrShowQuizz(){
+  quizzContainer.classList.toggle("hide");
+  scoreContainer.classList.toggle("hide");
 }
 
 init();
